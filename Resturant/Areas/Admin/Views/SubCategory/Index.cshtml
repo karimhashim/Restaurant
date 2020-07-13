@@ -1,0 +1,64 @@
+﻿@model List<SubCategory>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<br />
+<div class="border backgroundWhite">
+    <div class="row">
+        <div class="col-6 text-info">
+            <h2>
+              Sub  Categories
+            </h2>
+        </div>
+
+        <div class="col-6  text-right text-light">
+            <partial name="_CreateNewPartial" action="Create" />
+        </div>
+    </div>
+    <br />
+    <div class="border">
+        @if(Model.Count > 0)
+        {
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>
+
+                   @Html.DisplayNameFor(x =>x[0].Name)
+                    </th>
+                    <th>
+
+                   @Html.DisplayNameFor(x =>x[0].Category.Name)
+                    </th>
+
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var Subcategory in Model)
+                {
+                    <tr>
+
+
+                        <td>@Subcategory.Name</td>
+                        <td>@Subcategory.Category.Name</td>
+                        <td>
+
+                            <partial name="_TableButtonsPartial" model="Subcategory.Id" />
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+        }else
+        {
+            <p>No SubCategory found</p>
+        }
+    </div>
+</div>

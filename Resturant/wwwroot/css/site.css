@@ -69,3 +69,26 @@ body {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
+
+.backgroundWhite{
+    padding:30px;
+    border-radius:10px;
+    background-color:white;
+}
+
+.menufilter li{
+    display:inline-block;
+    cursor:pointer;
+    text-transform:uppercase;
+    background:#f5f5f5;
+    border-radius:5px;
+    font-size:13px;
+    font-weight:700;
+    color:black;
+    padding: 10px 20px 10px
+
+}
+
+.menufilter li:checked{
+    background-color:red;
+}

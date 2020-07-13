@@ -4,24 +4,32 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Resturant.Data;
 using Resturant.Models;
+using Resturant.Models.ViewModels;
 
 namespace Resturant.Controllers
 {
     [Area("Customer")]
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        ApplicationDbContext db;
+        public HomeController(ApplicationDbContext _db)
         {
-            _logger = logger;
+            db = _db;
         }
-
         public IActionResult Index()
         {
-            return View();
+            IndexViewModel viewModel = new IndexViewModel()
+            {
+                coupons = db.Coupons.Where(x=>x.IsActive ==true).ToList(),
+                categories = db.Categories.ToList(),
+                menuItems = db.MenuItems.Include(x => x.Category).Include(x => x.SubCategory).ToList()
+            };
+            return View(viewModel);
         }
 
         public IActionResult Privacy()

@@ -1,0 +1,119 @@
+﻿@model MenuItem
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Create</h1>
+
+<div class="text-info">
+    <h2>
+        Create menuitem
+    </h2>
+</div>
+
+<div class="border backgroundWhite">
+    <div class="row">
+        <div class="col-8 border-right">
+            <form method="post" enctype="multipart/form-data">
+
+                <div class="form-group row">
+                    <label asp-for="Name" class="col-sm-3 col-form-label"></label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" asp-for="Name">
+                        <span asp-validation-for="Name" class="text-danger"></span>
+
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label asp-for="@Model.Discription" class="col-sm-3 col-form-label"></label>
+                    <div class="col-sm-6">
+                        @Html.TextAreaFor(x => x.Discription, new { @class = "form-control" })
+
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label asp-for="@Model.Image" class="col-sm-3 col-form-label"></label>
+                    <div class="col-sm-6">
+
+                        <input type="file" name="file" class="form-control" asp-for="@Model.Image">
+
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label asp-for="@Model.Price" class="col-sm-3 col-form-label"></label>
+                    <div class="col-sm-6">
+                        <input type="number" class="form-control" asp-for="@Model.Price">
+                        <span asp-validation-for="@Model.Price" class="text-danger"></span>
+                    </div>
+                </div>
+               
+                <div class="form-group row">
+                    <label asp-for="@Model.Category.Name" class="col-sm-3 col-form-label"></label>
+                    <div class="col-sm-6">
+                        @Html.DropDownListFor(x => x.CategoryId, ViewBag.Categories as SelectList, new { @class = "form-control",Id="Category" })
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label asp-for="@Model.SubCategory.Name" class="col-sm-3 col-form-label"></label>
+                    <div class="col-sm-6">
+                        @Html.DropDownListFor(x => x.SubCategoryId, ViewBag.subcategories as SelectList, new { @class = "form-control",Id="SubCategory" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-6 offset-2">
+                        <div class="row">
+
+                            <div class="col-6">
+
+                                <input type="submit" value="Create" asp-action="Create" class="btn btn-info form-control" />
+                            </div>
+                            <div class="col-6">
+                                <a asp-action="index" class="btn btn-success form-control"> Back To List</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+       
+    </div>
+
+
+</div>
+
+@section scripts{ 
+
+<script>
+    $(document).ready(function () {
+        updateSubCategories()
+    })
+
+    function updateSubCategories() {
+        var id = $("#Category").val()
+     
+        $.ajax({
+
+            url: "/Admin/SubCategory/getSubCategoriesv2/" + id,
+            type: "GET",
+            dataType: "json",
+            success: function (response) {
+                $("#SubCategory").empty();
+                var items =''
+                for (var sub of response) {
+                 items += "<option value= " +sub.id +">" +sub.name + "</option>"  
+                }
+                $("#SubCategory").html(items)
+               
+            }
+        })
+    }
+
+    $("#Category").on('change', function () {
+        updateSubCategories();
+    })
+</script>
+} 

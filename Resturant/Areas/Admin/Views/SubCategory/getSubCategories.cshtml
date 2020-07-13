@@ -1,0 +1,9 @@
+﻿@model List<SubCategory>
+<h4>Existing SubCategories :</h4>
+<ul>
+    @foreach(var subcategory in Model)
+    {
+    <li> @subcategory.Name</li>
+
+    }
+</ul>

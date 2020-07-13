@@ -6,6 +6,8 @@
     <title>@ViewData["Title"] - Resturant</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+
+    <link href="~/lib/fontawesome-free-5.13.1-web/fontawesome-free-5.13.1-web/css/all.css" rel="stylesheet" />
 </head>
 <body>
     <header>
@@ -22,14 +24,14 @@
                         <li class="nav-item dropdown text-white-50" >
                            
                                 <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Content Management
+                                    Content Management <i class="fal fa-video-plus"></i>
                                 </a>
 
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    <a class="dropdown-item" href="#">Category</a>
-                                    <a class="dropdown-item" href="#">Sub Category</a>
-                                    <a class="dropdown-item" href="#">Menuitem</a>
-                                    <a class="dropdown-item" href="#">Coupouns </a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="Category" asp-action="index">Category</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="SubCategory" asp-action="index">Sub Category</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="MenuItem" asp-action="index">Menuitem</a>
+                                    <a class="dropdown-item"asp-area="Admin" asp-controller="Coupon" asp-action="index">Coupouns </a>
                                     <a class="dropdown-item" href="#">Users</a>
                                 </div>
                            
